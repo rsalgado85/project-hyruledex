@@ -127,7 +127,7 @@ export function AboutPage() {
             <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl bg-gradient-to-br from-[#ff4d6d] to-[#d946ef] p-[3px] shadow-xl shadow-[#ff4d6d]/20">
               <div className="w-full h-full rounded-2xl bg-dark-card flex items-center justify-center overflow-hidden">
                 <img
-                  src="/public/avatar.png"
+                  src="/avatar.png"
                   alt="Robinson Salgado"
                   className="w-full h-full object-cover"
                 />
