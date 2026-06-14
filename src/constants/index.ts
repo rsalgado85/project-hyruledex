@@ -55,6 +55,7 @@ export const RACE_COLORS: Record<string, string> = {
   character: '#C6A15B',
   fairy_zelda: '#E8A0D8',
   twili: '#704070',
+  zonai: '#6AAB8E',
   ancient: '#5B8A9E',
   demon: '#8B0000',
   spirit: '#A0C8E8',
