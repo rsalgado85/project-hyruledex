@@ -15,14 +15,14 @@ import { NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard,
-  BarChart3,
-  GitCompare,
-  Search,
-  Trophy,
-  Lightbulb,
+  Users,
+  Skull,
+  Package,
+  Map,
+  Swords,
+  BookOpen,
   Heart,
   Gamepad2,
-  BookOpen,
   User,
   Sun,
   Moon,
@@ -36,14 +36,14 @@ import { t, type TranslationKey } from '@/constants/translations';
 
 const iconMap: Record<string, React.ComponentType<{ size?: number }>> = {
   LayoutDashboard,
-  BarChart3,
-  GitCompare,
-  Search,
-  Trophy,
-  Lightbulb,
+  Users,
+  Skull,
+  Package,
+  Map,
+  Swords,
+  BookOpen,
   Heart,
   Gamepad2,
-  BookOpen,
   User,
 };
 
