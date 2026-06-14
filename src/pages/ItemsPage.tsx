@@ -32,7 +32,8 @@ interface ItemData {
   category: 'equipment' | 'tools' | 'containers';
   icon: React.ComponentType<{ size?: number; className?: string }>;
   rarity: 'common' | 'rare' | 'legendary';
-  value?: string; // rupee value
+  value?: string;
+  image: string;
 }
 
 const ITEMS: ItemData[] = [
@@ -46,6 +47,7 @@ const ITEMS: ItemData[] = [
     category: 'equipment',
     icon: Swords,
     rarity: 'legendary',
+    image: '/items/master_sword.png',
   },
   {
     id: 'hylian-shield',
@@ -56,6 +58,7 @@ const ITEMS: ItemData[] = [
     category: 'equipment',
     icon: Shield,
     rarity: 'legendary',
+    image: '/items/hylian_shield.png',
   },
   {
     id: 'heros-bow',
@@ -66,6 +69,7 @@ const ITEMS: ItemData[] = [
     category: 'equipment',
     icon: Crosshair,
     rarity: 'rare',
+    image: '/items/heros_bow.png',
   },
   {
     id: 'boomerang',
@@ -76,6 +80,7 @@ const ITEMS: ItemData[] = [
     category: 'equipment',
     icon: RotateCcw,
     rarity: 'common',
+    image: '/items/boomerang.png',
   },
   {
     id: 'hookshot',
@@ -86,6 +91,7 @@ const ITEMS: ItemData[] = [
     category: 'equipment',
     icon: Anchor,
     rarity: 'rare',
+    image: '/items/hookshot.png',
   },
   {
     id: 'bombs',
@@ -96,6 +102,7 @@ const ITEMS: ItemData[] = [
     category: 'equipment',
     icon: Bomb,
     rarity: 'common',
+    image: '/items/bombs.png',
   },
 
   // ── Tools ─────────────────────────────────────────────────────────────────
@@ -108,6 +115,7 @@ const ITEMS: ItemData[] = [
     category: 'tools',
     icon: Music,
     rarity: 'legendary',
+    image: '/items/ocarina.png',
   },
   {
     id: 'lens-of-truth',
@@ -118,6 +126,7 @@ const ITEMS: ItemData[] = [
     category: 'tools',
     icon: Eye,
     rarity: 'rare',
+    image: '/items/lens_of_truth.png',
   },
   {
     id: 'zora-tunic',
@@ -128,6 +137,7 @@ const ITEMS: ItemData[] = [
     category: 'tools',
     icon: Waves,
     rarity: 'rare',
+    image: '/items/zora_tunic.png',
   },
   {
     id: 'goron-tunic',
@@ -138,6 +148,7 @@ const ITEMS: ItemData[] = [
     category: 'tools',
     icon: Flame,
     rarity: 'rare',
+    image: '/items/goron_tunic.png',
   },
   {
     id: 'iron-boots',
@@ -148,6 +159,7 @@ const ITEMS: ItemData[] = [
     category: 'tools',
     icon: Footprints,
     rarity: 'common',
+    image: '/items/iron_boots.png',
   },
   {
     id: 'pegasus-boots',
@@ -158,6 +170,7 @@ const ITEMS: ItemData[] = [
     category: 'tools',
     icon: Footprints,
     rarity: 'rare',
+    image: '/items/pegasus_boots.png',
   },
 
   // ── Containers ────────────────────────────────────────────────────────────
@@ -170,6 +183,7 @@ const ITEMS: ItemData[] = [
     category: 'containers',
     icon: FlaskConical,
     rarity: 'common',
+    image: '/items/bottle.png',
   },
   {
     id: 'heart-container',
@@ -180,6 +194,7 @@ const ITEMS: ItemData[] = [
     category: 'containers',
     icon: Heart,
     rarity: 'legendary',
+    image: '/items/heart_container.png',
   },
   {
     id: 'magic-jar',
@@ -190,6 +205,7 @@ const ITEMS: ItemData[] = [
     category: 'containers',
     icon: Zap,
     rarity: 'rare',
+    image: '/items/magic_jar.png',
   },
   {
     id: 'green-rupee',
@@ -201,6 +217,7 @@ const ITEMS: ItemData[] = [
     icon: Gem,
     rarity: 'common',
     value: '1',
+    image: '/items/green_rupee.png',
   },
   {
     id: 'blue-rupee',
@@ -212,6 +229,7 @@ const ITEMS: ItemData[] = [
     icon: Gem,
     rarity: 'common',
     value: '5',
+    image: '/items/blue_rupee.png',
   },
   {
     id: 'red-rupee',
@@ -223,6 +241,7 @@ const ITEMS: ItemData[] = [
     icon: Gem,
     rarity: 'rare',
     value: '20',
+    image: '/items/red_rupee.png',
   },
   {
     id: 'silver-rupee',
@@ -234,6 +253,7 @@ const ITEMS: ItemData[] = [
     icon: Coins,
     rarity: 'rare',
     value: '100',
+    image: '/items/silver_rupee.png',
   },
   {
     id: 'gold-rupee',
@@ -245,6 +265,7 @@ const ITEMS: ItemData[] = [
     icon: Coins,
     rarity: 'legendary',
     value: '300',
+    image: '/items/gold_rupee.png',
   },
 ];
 
@@ -456,6 +477,25 @@ export function ItemsPage() {
                           </span>
                         )}
                       </div>
+
+                      {/* Item Image */}
+                      <div className="mt-2 mb-2 flex justify-center">
+                        <div
+                          className="relative w-full h-24 sm:h-28 rounded-lg overflow-hidden"
+                          style={{
+                            background: `linear-gradient(135deg, ${category.iconBg}, transparent)`,
+                            border: `1px solid ${category.borderColor}`,
+                          }}
+                        >
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-contain p-2"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+
                       <p className="text-[10px] sm:text-xs text-text-secondary mt-0.5 line-clamp-2">
                         {language === 'es' ? item.descriptionEs : item.description}
                       </p>
