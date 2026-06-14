@@ -80,7 +80,8 @@ export interface Platform {
 
 /**
  * Fetches Zelda games from RAWG API, ordered by release date (newest first).
- * Uses the 'the-legend-of-zelda' tag to filter only Zelda-related games.
+ * Uses 'zelda' search term to find all Zelda-related games.
+ * Player-entered search narrows results further (e.g. "zelda breath" → Breath of the Wild).
  */
 export async function fetchPokemonGames(
   page: number = 1,
@@ -88,17 +89,17 @@ export async function fetchPokemonGames(
   search?: string,
   platform?: string
 ): Promise<RawgResponse> {
+  // Build search: always include "zelda" as base, append user query if provided
+  const searchQuery = search ? `zelda ${search}` : 'zelda';
+
   const params = new URLSearchParams({
     key: RAWG_API_KEY,
     page: page.toString(),
     page_size: pageSize.toString(),
     ordering: '-released',
-    tags: 'the-legend-of-zelda',
+    search: searchQuery,
+    exclude_additions: 'true',
   });
-
-  if (search) {
-    params.set('search', search);
-  }
 
   if (platform) {
     params.set('platforms', platform);
