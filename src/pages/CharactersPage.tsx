@@ -33,6 +33,16 @@ export interface CharacterData {
   descriptionEs: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   image: string;
+  game: string;
+  gameEs: string;
+  role: string;
+  roleEs: string;
+  weapon: string;
+  weaponEs: string;
+  hp: number;
+  atk: number;
+  def: number;
+  spd: number;
 }
 
 export const CHARACTERS: CharacterData[] = [
@@ -44,6 +54,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'El Héroe de Hyrule, portador de la Espada Maestra. Encarnación del Valor.',
     icon: Swords,
     image: '/characters/link.png',
+    game: 'The Legend of Zelda',
+    gameEs: 'The Legend of Zelda',
+    role: 'Hero of Hyrule',
+    roleEs: 'Héroe de Hyrule',
+    weapon: 'Master Sword',
+    weaponEs: 'Espada Maestra',
+    hp: 85,
+    atk: 90,
+    def: 80,
+    spd: 88,
   },
   {
     id: 2,
@@ -53,6 +73,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'Princesa de Hyrule, portadora de la Trifuerza de la Sabiduría. Líder y erudita.',
     icon: Crown,
     image: '/characters/zelda.png',
+    game: 'The Legend of Zelda',
+    gameEs: 'The Legend of Zelda',
+    role: 'Princess of Hyrule',
+    roleEs: 'Princesa de Hyrule',
+    weapon: 'Bow of Light',
+    weaponEs: 'Arco de Luz',
+    hp: 70,
+    atk: 45,
+    def: 60,
+    spd: 75,
   },
   {
     id: 3,
@@ -62,6 +92,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'El Rey del Mal, portador de la Trifuerza del Poder. Señor de la guerra Gerudo.',
     icon: Skull,
     image: '/characters/ganondorf.png',
+    game: 'Ocarina of Time',
+    gameEs: 'Ocarina of Time',
+    role: 'Demon King',
+    roleEs: 'Rey Demonio',
+    weapon: 'Sword of the Sages',
+    weaponEs: 'Espada de los Sabios',
+    hp: 95,
+    atk: 95,
+    def: 85,
+    spd: 60,
   },
   {
     id: 4,
@@ -71,6 +111,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'Guardiana leal de la Princesa Zelda y líder del clan Sheikah.',
     icon: Eye,
     image: '/characters/impa.png',
+    game: 'Ocarina of Time',
+    gameEs: 'Ocarina of Time',
+    role: 'Sheikah Leader',
+    roleEs: 'Líder Sheikah',
+    weapon: 'Kodachi Blades',
+    weaponEs: 'Espadas Kodachi',
+    hp: 65,
+    atk: 75,
+    def: 55,
+    spd: 90,
   },
   {
     id: 5,
@@ -80,6 +130,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'Campeón de los Goron y piloto de la Bestia Divina Vah Rudania.',
     icon: Mountain,
     image: '/characters/daruk.png',
+    game: "Breath of the Wild",
+    gameEs: "Breath of the Wild",
+    role: 'Goron Champion',
+    roleEs: 'Campeón Goron',
+    weapon: 'Boulder Breaker',
+    weaponEs: 'Romperrocas',
+    hp: 90,
+    atk: 80,
+    def: 95,
+    spd: 35,
   },
   {
     id: 6,
@@ -89,6 +149,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'Campeona de los Zora y piloto de la Bestia Divina Vah Ruta. Sanadora talentosa.',
     icon: Droplets,
     image: '/characters/mipha.png',
+    game: "Breath of the Wild",
+    gameEs: "Breath of the Wild",
+    role: 'Zora Champion',
+    roleEs: 'Campeona Zora',
+    weapon: 'Lightscale Trident',
+    weaponEs: 'Tridente Escama de Luz',
+    hp: 60,
+    atk: 55,
+    def: 50,
+    spd: 80,
   },
   {
     id: 7,
@@ -98,6 +168,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'Campeón de los Rito y piloto de la Bestia Divina Vah Medoh. Arquero maestro.',
     icon: Wind,
     image: '/characters/revali.png',
+    game: "Breath of the Wild",
+    gameEs: "Breath of the Wild",
+    role: 'Rito Champion',
+    roleEs: 'Campeón Rito',
+    weapon: 'Great Eagle Bow',
+    weaponEs: 'Gran Arco del Águila',
+    hp: 55,
+    atk: 70,
+    def: 40,
+    spd: 95,
   },
   {
     id: 8,
@@ -107,6 +187,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'Campeona de los Gerudo y piloto de la Bestia Divina Vah Naboris.',
     icon: Zap,
     image: '/characters/urbosa.png',
+    game: "Breath of the Wild",
+    gameEs: "Breath of the Wild",
+    role: 'Gerudo Champion',
+    roleEs: 'Campeona Gerudo',
+    weapon: 'Scimitar of the Seven',
+    weaponEs: 'Cimitarra de las Siete',
+    hp: 75,
+    atk: 85,
+    def: 65,
+    spd: 70,
   },
   {
     id: 9,
@@ -116,6 +206,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'El espíritu de la Espada Maestra, creado por la diosa Hylia.',
     icon: Sparkles,
     image: '/characters/fi.png',
+    game: 'Skyward Sword',
+    gameEs: 'Skyward Sword',
+    role: 'Sword Spirit',
+    roleEs: 'Espíritu de la Espada',
+    weapon: 'Master Sword (inhabits)',
+    weaponEs: 'Espada Maestra (habita)',
+    hp: 50,
+    atk: 40,
+    def: 35,
+    spd: 85,
   },
   {
     id: 10,
@@ -125,6 +225,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'La Princesa del Crepúsculo, gobernante del Reino del Crepúsculo.',
     icon: Moon,
     image: '/characters/midna.png',
+    game: 'Twilight Princess',
+    gameEs: 'Twilight Princess',
+    role: 'Twilight Princess',
+    roleEs: 'Princesa del Crepúsculo',
+    weapon: 'Fused Shadows',
+    weaponEs: 'Sombras Fusionadas',
+    hp: 70,
+    atk: 65,
+    def: 55,
+    spd: 80,
   },
   {
     id: 11,
@@ -134,6 +244,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'El cartógrafo obsesionado con las hadas. Sueña con convertirse en hada.',
     icon: Star,
     image: '/characters/tingle.png',
+    game: "Majora's Mask",
+    gameEs: "Majora's Mask",
+    role: 'Map Maker',
+    roleEs: 'Cartógrafo',
+    weapon: 'Tingle Tuner',
+    weaponEs: 'Sintonizador Tingle',
+    hp: 30,
+    atk: 15,
+    def: 20,
+    spd: 40,
   },
   {
     id: 12,
@@ -143,6 +263,16 @@ export const CHARACTERS: CharacterData[] = [
     descriptionEs: 'El comerciante viajero que recorre Hyrule vendiendo mercancías.',
     icon: ShoppingBag,
     image: '/characters/beedle.png',
+    game: 'The Wind Waker',
+    gameEs: 'The Wind Waker',
+    role: 'Traveling Merchant',
+    roleEs: 'Comerciante Viajero',
+    weapon: 'Beetle Ship',
+    weaponEs: 'Barco Escarabajo',
+    hp: 25,
+    atk: 10,
+    def: 15,
+    spd: 50,
   },
 ];
 
@@ -286,6 +416,47 @@ function CharacterCard({
               }}
             />
           </motion.div>
+        </div>
+
+        {/* Meta: Game + Role + Weapon */}
+        <div className="space-y-1.5 mb-3">
+          <div className="flex items-center gap-1.5 text-[10px] text-text-secondary/60">
+            <span className="text-text-secondary/40">🎮</span>
+            <span>{language === 'es' ? character.gameEs : character.game}</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-[10px] text-text-secondary/60">
+            <span className="text-text-secondary/40">⭐</span>
+            <span>{language === 'es' ? character.roleEs : character.role}</span>
+          </div>
+          <div className="flex items-center gap-1.5 text-[10px] text-text-secondary/60">
+            <span className="text-text-secondary/40">⚔️</span>
+            <span>{language === 'es' ? character.weaponEs : character.weapon}</span>
+          </div>
+        </div>
+
+        {/* Stat Bars */}
+        <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 mb-3">
+          {[
+            { label: '❤️', value: character.hp, color: '#3E6B48' },
+            { label: '⚔️', value: character.atk, color: '#8B3A3A' },
+            { label: '🛡️', value: character.def, color: '#5B8A9E' },
+            { label: '⚡', value: character.spd, color: '#C6A15B' },
+          ].map((stat) => (
+            <div key={stat.label} className="flex items-center gap-1.5">
+              <span className="text-xs w-5">{stat.label}</span>
+              <div className="flex-1 h-1.5 rounded-full bg-white/5 overflow-hidden">
+                <motion.div
+                  className="h-full rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: `${stat.value}%` }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  style={{ backgroundColor: stat.color }}
+                />
+              </div>
+              <span className="text-[9px] font-mono text-text-secondary/50 w-6 text-right">{stat.value}</span>
+            </div>
+          ))}
         </div>
 
         {/* Description — expandable on click */}

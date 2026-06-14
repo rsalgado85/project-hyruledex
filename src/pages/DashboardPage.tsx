@@ -23,24 +23,7 @@ function pickRandom<T>(arr: T[], count: number): T[] {
   return shuffled.slice(0, count);
 }
 
-/* ─── Stats for characters (normalized 0-100) ───────── */
-
-const CHARACTER_STATS: Record<string, { hp: number; atk: number; def: number; spd: number }> = {
-  'Link': { hp: 85, atk: 90, def: 80, spd: 88 },
-  'Princess Zelda': { hp: 70, atk: 45, def: 60, spd: 75 },
-  'Ganondorf': { hp: 95, atk: 95, def: 85, spd: 60 },
-  'Impa': { hp: 65, atk: 75, def: 55, spd: 90 },
-  'Daruk': { hp: 90, atk: 80, def: 95, spd: 35 },
-  'Mipha': { hp: 60, atk: 55, def: 50, spd: 80 },
-  'Revali': { hp: 55, atk: 70, def: 40, spd: 95 },
-  'Urbosa': { hp: 75, atk: 85, def: 65, spd: 70 },
-  'Fi': { hp: 50, atk: 40, def: 35, spd: 85 },
-  'Midna': { hp: 70, atk: 65, def: 55, spd: 80 },
-  'Tingle': { hp: 30, atk: 15, def: 20, spd: 40 },
-  'Beedle': { hp: 25, atk: 10, def: 15, spd: 50 },
-};
-
-/* ─── Featured Character Card (compact) ──────────────── */
+/* ─── Shuffle helpers ────────────────────────────────── */
 
 function FeaturedCard({
   character,
@@ -52,7 +35,6 @@ function FeaturedCard({
   const { theme } = useAppStore();
   const isDark = theme === 'dark';
   const raceColor = RACE_COLORS[character.race] || '#C6A15B';
-  const stats = CHARACTER_STATS[character.name] || { hp: 50, atk: 50, def: 50, spd: 50 };
   const description = language === 'es' ? character.descriptionEs : character.description;
 
   return (
@@ -99,10 +81,10 @@ function FeaturedCard({
           {/* Stat bars */}
           <div className="grid grid-cols-2 gap-2 mt-4">
             {[
-              { label: '❤️', value: stats.hp, color: '#3E6B48' },
-              { label: '⚔️', value: stats.atk, color: '#8B3A3A' },
-              { label: '🛡️', value: stats.def, color: '#5B8A9E' },
-              { label: '⚡', value: stats.spd, color: '#C6A15B' },
+              { label: '❤️', value: character.hp, color: '#3E6B48' },
+              { label: '⚔️', value: character.atk, color: '#8B3A3A' },
+              { label: '🛡️', value: character.def, color: '#5B8A9E' },
+              { label: '⚡', value: character.spd, color: '#C6A15B' },
             ].map((stat) => (
               <div key={stat.label} className="flex items-center gap-2">
                 <span className="text-sm w-6">{stat.label}</span>
