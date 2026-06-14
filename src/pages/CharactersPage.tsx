@@ -32,6 +32,7 @@ interface CharacterData {
   description: string;
   descriptionEs: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
+  image: string;
 }
 
 const CHARACTERS: CharacterData[] = [
@@ -42,6 +43,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'The Hero of Hyrule, wielder of the Master Sword. Embodiment of Courage.',
     descriptionEs: 'El Héroe de Hyrule, portador de la Espada Maestra. Encarnación del Valor.',
     icon: Swords,
+    image: '/characters/link.png',
   },
   {
     id: 2,
@@ -50,6 +52,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'Princess of Hyrule, bearer of the Triforce of Wisdom. Leader and scholar.',
     descriptionEs: 'Princesa de Hyrule, portadora de la Trifuerza de la Sabiduría. Líder y erudita.',
     icon: Crown,
+    image: '/characters/zelda.png',
   },
   {
     id: 3,
@@ -58,6 +61,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'The King of Evil, bearer of the Triforce of Power. Gerudo warlord.',
     descriptionEs: 'El Rey del Mal, portador de la Trifuerza del Poder. Señor de la guerra Gerudo.',
     icon: Skull,
+    image: '/characters/ganondorf.png',
   },
   {
     id: 4,
@@ -66,6 +70,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'Loyal guardian of Princess Zelda and leader of the Sheikah clan.',
     descriptionEs: 'Guardiana leal de la Princesa Zelda y líder del clan Sheikah.',
     icon: Eye,
+    image: '/characters/impa.png',
   },
   {
     id: 5,
@@ -74,6 +79,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'Champion of the Gorons and pilot of the Divine Beast Vah Rudania.',
     descriptionEs: 'Campeón de los Goron y piloto de la Bestia Divina Vah Rudania.',
     icon: Mountain,
+    image: '/characters/daruk.png',
   },
   {
     id: 6,
@@ -82,6 +88,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'Champion of the Zoras and pilot of the Divine Beast Vah Ruta. Gifted healer.',
     descriptionEs: 'Campeona de los Zora y piloto de la Bestia Divina Vah Ruta. Sanadora talentosa.',
     icon: Droplets,
+    image: '/characters/mipha.png',
   },
   {
     id: 7,
@@ -90,6 +97,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'Champion of the Rito and pilot of the Divine Beast Vah Medoh. Master archer.',
     descriptionEs: 'Campeón de los Rito y piloto de la Bestia Divina Vah Medoh. Arquero maestro.',
     icon: Wind,
+    image: '/characters/revali.png',
   },
   {
     id: 8,
@@ -98,6 +106,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'Champion of the Gerudo and pilot of the Divine Beast Vah Naboris.',
     descriptionEs: 'Campeona de los Gerudo y piloto de la Bestia Divina Vah Naboris.',
     icon: Zap,
+    image: '/characters/urbosa.png',
   },
   {
     id: 9,
@@ -106,6 +115,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'The spirit of the Master Sword, created by the goddess Hylia.',
     descriptionEs: 'El espíritu de la Espada Maestra, creado por la diosa Hylia.',
     icon: Sparkles,
+    image: '/characters/fi.png',
   },
   {
     id: 10,
@@ -114,6 +124,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'The Twilight Princess, ruler of the Twilight Realm.',
     descriptionEs: 'La Princesa del Crepúsculo, gobernante del Reino del Crepúsculo.',
     icon: Moon,
+    image: '/characters/midna.png',
   },
   {
     id: 11,
@@ -122,6 +133,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'The fairy-obsessed map maker. Dreams of becoming a fairy.',
     descriptionEs: 'El cartógrafo obsesionado con las hadas. Sueña con convertirse en hada.',
     icon: Star,
+    image: '/characters/tingle.png',
   },
   {
     id: 12,
@@ -130,6 +142,7 @@ const CHARACTERS: CharacterData[] = [
     description: 'The traveling merchant who roams Hyrule selling goods.',
     descriptionEs: 'El comerciante viajero que recorre Hyrule vendiendo mercancías.',
     icon: ShoppingBag,
+    image: '/characters/beedle.png',
   },
 ];
 
@@ -247,6 +260,33 @@ function CharacterCard({
         >
           {character.name}
         </h3>
+
+        {/* Character Image */}
+        <div className="mb-3 flex justify-center">
+          <motion.div
+            className="relative w-full h-40 sm:h-48 rounded-xl overflow-hidden"
+            style={{
+              background: `linear-gradient(135deg, ${raceColor}15 0%, ${raceColor}08 100%)`,
+              border: `1px solid ${raceColor}25`,
+            }}
+            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 0.3 }}
+          >
+            <img
+              src={character.image}
+              alt={character.name}
+              className="w-full h-full object-contain p-2"
+              loading="lazy"
+            />
+            {/* Subtle bottom gradient overlay */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-8"
+              style={{
+                background: `linear-gradient(to top, ${raceColor}10, transparent)`,
+              }}
+            />
+          </motion.div>
+        </div>
 
         {/* Description — expandable on click */}
         <motion.div
