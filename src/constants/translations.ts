@@ -9,6 +9,7 @@ export const translations = {
     'nav.characters': 'Characters',
     'nav.bosses': 'Bosses',
     'nav.items': 'Items',
+    'nav.maps': 'Maps',
     'nav.dungeons': 'Timeline',
     'nav.lore': 'Lore',
     'nav.weapons': 'Weapons',
@@ -286,6 +287,10 @@ export const translations = {
     'items.title': 'Items of Hyrule',
     'items.subtitle': 'Explore iconic items from across The Legend of Zelda series',
 
+    // Maps Page
+    'maps.title': 'Maps of Hyrule',
+    'maps.subtitle': 'Explore the complete maps of every Zelda game era — from the original 8-bit Hyrule to the vast open world of Tears of the Kingdom',
+
     // Weapons Page
     'weapons.title': 'Legendary Weapons',
     'weapons.subtitle': 'The most powerful weapons wielded by the Hero of Hyrule',
@@ -340,6 +345,7 @@ export const translations = {
     'nav.characters': 'Personajes',
     'nav.bosses': 'Jefes',
     'nav.items': 'Objetos',
+    'nav.maps': 'Mapas',
     'nav.dungeons': 'Línea de tiempo',
     'nav.lore': 'Historia',
     'nav.weapons': 'Armas',
@@ -616,6 +622,10 @@ export const translations = {
     // Items Page
     'items.title': 'Objetos de Hyrule',
     'items.subtitle': 'Explora objetos icónicos de la serie The Legend of Zelda',
+
+    // Maps Page
+    'maps.title': 'Mapas de Hyrule',
+    'maps.subtitle': 'Explora los mapas completos de cada era de Zelda — desde el Hyrule original de 8 bits hasta el vasto mundo abierto de Tears of the Kingdom',
 
     // Weapons Page
     'weapons.title': 'Armas Legendarias',

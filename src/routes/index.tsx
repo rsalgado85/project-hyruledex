@@ -12,6 +12,7 @@ const DungeonsPage = lazy(() => import('@/pages/HistoryPage').then(m => ({ defau
 const LorePage = lazy(() => import('@/pages/LorePage').then(m => ({ default: m.LorePage })));
 const WeaponsPage = lazy(() => import('@/pages/WeaponsPage').then(m => ({ default: m.WeaponsPage })));
 const GamesPage = lazy(() => import('@/pages/VideogamesPage').then(m => ({ default: m.VideogamesPage })));
+const MapsPage = lazy(() => import('@/pages/MapsPage').then(m => ({ default: m.MapsPage })));
 const FavoritesPage = lazy(() => import('@/pages/FavoritesPage').then(m => ({ default: m.FavoritesPage })));
 const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m.AboutPage })));
 
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
       { path: 'lore', element: <SuspenseWrapper><LorePage /></SuspenseWrapper> },
       { path: 'weapons', element: <SuspenseWrapper><WeaponsPage /></SuspenseWrapper> },
       { path: 'games', element: <SuspenseWrapper><GamesPage /></SuspenseWrapper> },
+      { path: 'maps', element: <SuspenseWrapper><MapsPage /></SuspenseWrapper> },
       { path: 'favorites', element: <SuspenseWrapper><FavoritesPage /></SuspenseWrapper> },
       { path: 'about', element: <SuspenseWrapper><AboutPage /></SuspenseWrapper> },
     ],
