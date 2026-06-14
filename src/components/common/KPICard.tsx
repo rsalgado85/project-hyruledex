@@ -18,13 +18,19 @@ export function KPICard({ label, value, icon: Icon, subtitle, trend, trendValue,
   return (
     <motion.button
       onClick={onClick}
-      className="kpi-card text-left w-full cursor-pointer group"
+      className="kpi-card text-left w-full cursor-pointer group relative overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
       aria-label={`${label}: ${value}`}
     >
+      {/* Era badge - positioned top-right */}
+      {pokemonId && (
+        <div className="absolute top-2 right-2 z-10">
+          <EraBadge pokemonId={pokemonId} size="sm" />
+        </div>
+      )}
       <div className="flex items-center justify-between">
         <span className="kpi-label">{label}</span>
         <div className="p-2 rounded-lg" style={{ backgroundColor: 'rgba(198, 161, 91, 0.1)', color: '#E8D8B0' }}>
@@ -41,9 +47,6 @@ export function KPICard({ label, value, icon: Icon, subtitle, trend, trendValue,
           />
         )}
         <span className="kpi-value">{value}</span>
-        {pokemonId && (
-          <EraBadge pokemonId={pokemonId} size="sm" />
-        )}
       </div>
       {subtitle && (
         <span className="text-xs text-text-secondary">{subtitle}</span>
