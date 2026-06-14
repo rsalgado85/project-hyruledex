@@ -46,6 +46,11 @@ function formatName(name: string): string {
     .join(' ');
 }
 
+function getLocalImage(name: string): string {
+  const filename = name.toLowerCase().replace(/\s+/g, '_');
+  return `/creatures/${filename}.png`;
+}
+
 /* ─── Detail Modal ──────────────────────────────────── */
 
 function CreatureDetail({
@@ -108,9 +113,10 @@ function CreatureDetail({
           }}
         >
           <img
-            src={creature.image}
+            src={getLocalImage(creature.name)}
             alt={displayName}
             className="w-full h-full object-contain p-4"
+            onError={(e) => { (e.target as HTMLImageElement).src = creature.image; }}
           />
           <div className="absolute inset-x-0 bottom-0 h-20"
             style={{ background: `linear-gradient(to top, ${isDark ? '#141A1F' : '#ffffff'}, transparent)` }}
@@ -238,10 +244,11 @@ function CreatureCard({
         }}
       >
         <img
-          src={creature.image}
+          src={getLocalImage(creature.name)}
           alt={displayName}
           className="w-full h-full object-contain p-3 group-hover:scale-110 transition-transform duration-300"
           loading="lazy"
+          onError={(e) => { (e.target as HTMLImageElement).src = creature.image; }}
         />
         {/* Category badge */}
         <div className="absolute top-2 right-2">
