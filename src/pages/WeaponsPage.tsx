@@ -28,6 +28,7 @@ interface WeaponData {
   descriptionEs: string;
   category: WeaponCategory;
   icon: React.ComponentType<{ size?: number; className?: string }>;
+  image: string;
 }
 
 const WEAPONS: WeaponData[] = [
@@ -43,6 +44,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'La Espada del Destierro del Mal, forjada por la Diosa Hylia',
     category: 'Sword',
     icon: Swords,
+    image: '/weapons/master_sword.png',
   },
   {
     id: 'biggoron-sword',
@@ -55,6 +57,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Cuchillo Gigante forjado por Biggoron',
     category: 'Sword',
     icon: Sword,
+    image: '/weapons/biggoron_sword.png',
   },
   {
     id: 'fierce-deity-sword',
@@ -67,6 +70,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Hoja de doble hélice de la Deidad Feroz',
     category: 'Sword',
     icon: Flame,
+    image: '/weapons/fierce_deity_sword.png',
   },
   {
     id: 'goddess-sword',
@@ -79,6 +83,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'La espada que se convirtió en la Espada Maestra',
     category: 'Sword',
     icon: Sword,
+    image: '/weapons/goddess_sword.png',
   },
   {
     id: 'four-sword',
@@ -91,6 +96,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Divide al portador en cuatro',
     category: 'Sword',
     icon: Swords,
+    image: '/weapons/four_sword.png',
   },
   {
     id: 'royal-claymore',
@@ -103,6 +109,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Espada de guardia real a dos manos',
     category: 'Sword',
     icon: Swords,
+    image: '/weapons/royal_claymore.png',
   },
 
   // ── Bows (4) ─────────────────────────────────────────────────────────────
@@ -117,6 +124,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Arco estándar del Héroe',
     category: 'Bow',
     icon: Crosshair,
+    image: '/weapons/heros_bow.png',
   },
   {
     id: 'great-eagle-bow',
@@ -129,6 +137,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Arco del campeón Revali, dispara 3 flechas',
     category: 'Bow',
     icon: Crosshair,
+    image: '/weapons/great_eagle_bow.png',
   },
   {
     id: 'twilight-bow',
@@ -141,6 +150,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Dispara flechas de luz pura',
     category: 'Bow',
     icon: Crosshair,
+    image: '/weapons/twilight_bow.png',
   },
   {
     id: 'bow-of-light',
@@ -153,6 +163,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'El regalo de Zelda en la batalla final',
     category: 'Bow',
     icon: Zap,
+    image: '/weapons/bow_of_light.png',
   },
 
   // ── Other (4) ────────────────────────────────────────────────────────────
@@ -167,6 +178,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Arma Goron, rompe rocas',
     category: 'Other',
     icon: Gavel,
+    image: '/weapons/megaton_hammer.png',
   },
   {
     id: 'ball-and-chain',
@@ -179,6 +191,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Arma pesada de Twilight Princess',
     category: 'Other',
     icon: Shield,
+    image: '/weapons/ball_and_chain.png',
   },
   {
     id: 'hookshot',
@@ -191,6 +204,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Dispositivo de agarre, aturde enemigos',
     category: 'Other',
     icon: Anchor,
+    image: '/weapons/hookshot.png',
   },
   {
     id: 'boomerang',
@@ -203,6 +217,7 @@ const WEAPONS: WeaponData[] = [
     descriptionEs: 'Siempre regresa, aturde objetivos',
     category: 'Other',
     icon: Zap,
+    image: '/weapons/boomerang.png',
   },
 ];
 
@@ -383,6 +398,24 @@ export function WeaponsPage() {
                         >
                           {language === 'es' ? weapon.typeEs : weapon.type}
                         </span>
+                      </div>
+
+                      {/* Weapon Image */}
+                      <div className="mt-2 mb-2 flex justify-center">
+                        <div
+                          className="relative w-full h-24 sm:h-28 rounded-lg overflow-hidden"
+                          style={{
+                            background: `linear-gradient(135deg, ${category.iconBg}, transparent)`,
+                            border: `1px solid ${category.borderColor}`,
+                          }}
+                        >
+                          <img
+                            src={weapon.image}
+                            alt={weapon.name}
+                            className="w-full h-full object-contain p-2"
+                            loading="lazy"
+                          />
+                        </div>
                       </div>
 
                       {/* Description */}
