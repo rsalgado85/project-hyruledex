@@ -48,6 +48,7 @@ interface TimelineEntry {
   descriptionEs: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   year?: string;
+  yearEs?: string;
 }
 
 interface TimelineBranch {
@@ -76,6 +77,7 @@ const UNIFIED_TIMELINE: TimelineEntry[] = [
     descriptionEs: 'El comienzo de todas las líneas temporales. La Diosa Hylia eleva Skyloft a los cielos para proteger a la humanidad del demonio Demise. Link forja la Espada Maestra y establece el ciclo eterno de reencarnación.',
     icon: Cloud,
     year: 'Era of the Goddess Hylia',
+    yearEs: 'Era de la Diosa Hylia',
   },
   {
     id: 'chaos-era',
@@ -95,6 +97,7 @@ const UNIFIED_TIMELINE: TimelineEntry[] = [
     descriptionEs: 'El Héroe del Tiempo extrae la Espada Maestra de su pedestal y viaja a través del tiempo. Al derrotar a Ganondorf, la línea temporal se divide en tres ramas distintas según el desenlace.',
     icon: Clock,
     year: 'The Timeline Splits',
+    yearEs: 'La Línea se Divide',
   },
 ];
 
@@ -580,7 +583,7 @@ export function LorePage() {
                                       className="text-[10px] sm:text-xs mt-0.5"
                                       style={{ color: branch.color }}
                                     >
-                                      {entry.year}
+                                      {language === 'es' && entry.yearEs ? entry.yearEs : entry.year}
                                     </p>
                                   )}
 
