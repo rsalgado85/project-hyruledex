@@ -18,10 +18,12 @@ import {
   Search,
   Filter,
   X,
+  Heart,
 } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { t } from '@/constants/translations';
 import { RACE_COLORS } from '@/constants';
+import type { FavoriteType } from '@/store/useAppStore';
 
 /* ─── Character Data ─────────────────────────────────── */
 
@@ -304,8 +306,9 @@ function CharacterCard({
   isExpanded: boolean;
   onToggle: () => void;
 }) {
-  const { theme } = useAppStore();
+  const { theme, isFavorite, toggleFavorite } = useAppStore();
   const isDark = theme === 'dark';
+  const fav = isFavorite('character', character.id);
 
   const raceColor = RACE_COLORS[character.race] || '#C6A15B';
   const raceLabel = RACE_LABELS[character.race]
@@ -353,9 +356,10 @@ function CharacterCard({
       />
 
       <div className="relative p-5 sm:p-6">
-        {/* Header row: icon + race badge */}
+        {/* Header row: icon + race badge + fav */}
         <div className="flex items-center justify-between mb-4">
           {/* Icon circle */}
+          <div className="flex items-center gap-2">
           <motion.div
             className="w-11 h-11 rounded-xl flex items-center justify-center"
             style={{
@@ -367,6 +371,17 @@ function CharacterCard({
           >
             <Icon size={22} className="flex-shrink-0" />
           </motion.div>
+
+          {/* Favorite button */}
+          <button
+            onClick={(e) => { e.stopPropagation(); toggleFavorite('character', character.id); }}
+            className="p-1.5 rounded-lg transition-all"
+            style={{ color: fav ? '#e74c3c' : isDark ? 'rgba(255,255,255,0.25)' : 'rgba(0,0,0,0.2)' }}
+            aria-label="Toggle favorite"
+          >
+            <Heart size={14} fill={fav ? 'currentColor' : 'none'} />
+          </button>
+          </div>
 
           {/* Race badge */}
           <motion.span

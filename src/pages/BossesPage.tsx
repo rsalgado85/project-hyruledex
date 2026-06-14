@@ -17,6 +17,7 @@ import {
   Wind,
   Bone,
   Cog,
+  Heart,
 } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { t } from '@/constants/translations';
@@ -407,6 +408,8 @@ export function BossesPage() {
             {filteredBosses.map((boss) => {
               const BossIcon = boss.icon;
               const isHovered = hoveredId === boss.id;
+              const bossIsFav = useAppStore((s) => s.isFavorite('boss', boss.id));
+              const toggleBossFav = useAppStore((s) => s.toggleFavorite);
 
               return (
                 <motion.div
@@ -439,6 +442,7 @@ export function BossesPage() {
 
                     {/* ── Header: Icon + Name ── */}
                     <div className="flex items-start gap-3">
+                      <div className="flex items-center gap-2">
                       <div
                         className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-500"
                         style={{
@@ -453,6 +457,15 @@ export function BossesPage() {
                           size={22}
                           className="flex-shrink-0"
                         />
+                      </div>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); toggleBossFav('boss', boss.id); }}
+                          className="p-1 rounded-lg transition-all"
+                          style={{ color: bossIsFav ? '#e74c3c' : 'rgba(255,255,255,0.2)' }}
+                          aria-label="Toggle favorite"
+                        >
+                          <Heart size={13} fill={bossIsFav ? 'currentColor' : 'none'} />
+                        </button>
                       </div>
 
                       <div className="min-w-0 flex-1">

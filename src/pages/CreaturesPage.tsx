@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Loader2,
   AlertTriangle,
+  Heart,
 } from 'lucide-react';
 import { useAppStore } from '@/store/useAppStore';
 import { t } from '@/constants/translations';
@@ -336,9 +337,10 @@ function CreatureCard({
   language: 'en' | 'es';
   onClick: () => void;
 }) {
-  const { theme } = useAppStore();
+  const { theme, isFavorite, toggleFavorite } = useAppStore();
   const isDark = theme === 'dark';
   const stats = getCreatureStats(creature.name, creature.category);
+  const isFav = isFavorite('creature', creature.id);
 
   const displayName = formatName(creature.name);
   const isMonster = creature.category === 'monsters';
@@ -370,6 +372,16 @@ function CreatureCard({
           loading="lazy"
           onError={(e) => { (e.target as HTMLImageElement).src = creature.image; }}
         />
+        {/* Favorite button */}
+        <button
+          onClick={(e) => { e.stopPropagation(); toggleFavorite('creature', creature.id); }}
+          className="absolute top-2 left-2 z-10 p-1.5 rounded-full transition-all hover:scale-110"
+          style={{ backgroundColor: isFav ? 'rgba(231,76,60,0.25)' : 'rgba(0,0,0,0.35)', color: isFav ? '#e74c3c' : 'rgba(255,255,255,0.7)' }}
+          aria-label="Toggle favorite"
+        >
+          <Heart size={12} fill={isFav ? 'currentColor' : 'none'} />
+        </button>
+
         {/* Category badge */}
         <div className="absolute top-2 right-2">
           <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider"
