@@ -70,7 +70,7 @@ export function TopAbilitiesCard({ pokemonId }: TopAbilitiesCardProps) {
           </div>
         </div>
         <motion.button
-          onClick={() => navigate(`/character/${character?.id || targetId}`)}
+          onClick={() => navigate('/characters')}
           className="text-[11px] font-semibold px-3 py-1.5 rounded-full"
           style={{
             backgroundColor: `${typeColor}22`,

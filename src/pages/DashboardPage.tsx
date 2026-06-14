@@ -182,7 +182,7 @@ export function DashboardPage() {
         <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">{t('dashboard.quickActions', language)}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <motion.button
-            onClick={() => navigate('/statistics')}
+            onClick={() => navigate('/characters')}
             className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
             style={{
               backgroundColor: 'rgba(255,255,255,0.03)',
@@ -194,7 +194,7 @@ export function DashboardPage() {
             <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{t('dashboard.viewStatsDesc', language)}</p>
           </motion.button>
           <motion.button
-            onClick={() => navigate('/compare')}
+            onClick={() => navigate('/bosses')}
             className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
             style={{
               backgroundColor: 'rgba(255,255,255,0.03)',
@@ -206,7 +206,7 @@ export function DashboardPage() {
             <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{t('dashboard.compareDesc', language)}</p>
           </motion.button>
           <motion.button
-            onClick={() => navigate('/rankings')}
+            onClick={() => navigate('/items')}
             className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
             style={{
               backgroundColor: 'rgba(255,255,255,0.03)',
@@ -218,7 +218,7 @@ export function DashboardPage() {
             <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{t('dashboard.rankingsDesc', language)}</p>
           </motion.button>
           <motion.button
-            onClick={() => navigate('/insights')}
+            onClick={() => navigate('/lore')}
             className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
             style={{
               backgroundColor: 'rgba(255,255,255,0.03)',

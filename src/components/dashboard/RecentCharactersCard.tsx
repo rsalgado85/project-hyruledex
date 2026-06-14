@@ -52,7 +52,7 @@ export function RecentCharactersCard() {
         </div>
         {recentCharacters.length > 0 && (
           <motion.button
-            onClick={() => navigate('/explorer')}
+            onClick={() => navigate('/characters')}
             className="text-[11px] font-semibold px-3 py-1.5 rounded-full flex items-center gap-1"
             style={{
               backgroundColor: 'rgba(255,255,255,0.06)',
