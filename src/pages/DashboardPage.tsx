@@ -319,7 +319,7 @@ export function DashboardPage() {
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {[
             { label: t('dashboard.viewStats', language), desc: t('dashboard.viewStatsDesc', language), path: '/characters' },
-            { label: t('dashboard.compare', language), desc: t('dashboard.compareDesc', language), path: '/bosses' },
+            { label: t('dashboard.compare', language), desc: t('dashboard.compareDesc', language), path: '/compare' },
             { label: t('dashboard.rankings', language), desc: t('dashboard.rankingsDesc', language), path: '/items' },
             { label: t('dashboard.insights', language), desc: t('dashboard.insightsDesc', language), path: '/lore' },
           ].map((btn) => (

@@ -83,7 +83,7 @@ export const translations = {
     'dashboard.viewStats': 'Characters',
     'dashboard.viewStatsDesc': 'Heroes, villains & allies of Hyrule',
     'dashboard.compare': 'Bosses',
-    'dashboard.compareDesc': 'The most fearsome enemies',
+    'dashboard.compareDesc': 'Compare stats side by side',
     'dashboard.rankings': 'Items',
     'dashboard.rankingsDesc': 'Weapons, gear & collectibles',
     'dashboard.insights': 'Lore',
@@ -124,7 +124,7 @@ export const translations = {
 
     // Compare
     'compare.title': 'Creature Comparator',
-    'compare.subtitle': 'Compare stats between two creatures side by side',
+    'compare.subtitle': 'Compare stats across characters, bosses, and creatures — side by side',
     'compare.first': 'First Creature',
     'compare.second': 'Second Creature',
     'compare.placeholder': 'Search creature by name...',
@@ -147,8 +147,8 @@ export const translations = {
     'compare.searchAria': 'Search creature to compare',
     'compare.removeAria': 'Remove from comparison',
     'compare.statsComparison': 'Stats Comparison',
-    'compare.selectPrompt': 'Select at least 2 creatures to compare',
-    'compare.selectDesc': 'Click on the empty slots above to add creatures and compare their stats side by side.',
+    'compare.selectPrompt': 'Select at least 2 items to compare',
+    'compare.selectDesc': 'Click on the empty slots above to add characters, bosses, or creatures and compare their stats side by side.',
     'common.stat': 'Stat',
 
     // Explorer
@@ -424,7 +424,7 @@ export const translations = {
     'dashboard.viewStats': 'Personajes',
     'dashboard.viewStatsDesc': 'Héroes, villanos y aliados de Hyrule',
     'dashboard.compare': 'Jefes',
-    'dashboard.compareDesc': 'Los enemigos más temibles',
+    'dashboard.compareDesc': 'Compara estadísticas lado a lado',
     'dashboard.rankings': 'Objetos',
     'dashboard.rankingsDesc': 'Armas, equipo y coleccionables',
     'dashboard.insights': 'Historia',
@@ -465,7 +465,7 @@ export const translations = {
 
     // Compare
     'compare.title': 'Comparador de Criaturas',
-    'compare.subtitle': 'Compara estadísticas entre dos criaturas lado a lado',
+    'compare.subtitle': 'Compara estadísticas entre personajes, jefes y criaturas — lado a lado',
     'compare.first': 'Primera Criatura',
     'compare.second': 'Segunda Criatura',
     'compare.placeholder': 'Busca criatura por nombre...',
@@ -488,8 +488,8 @@ export const translations = {
     'compare.searchAria': 'Buscar criatura para comparar',
     'compare.removeAria': 'Quitar de comparación',
     'compare.statsComparison': 'Comparación de Estadísticas',
-    'compare.selectPrompt': 'Selecciona al menos 2 criaturas para comparar',
-    'compare.selectDesc': 'Haz clic en los espacios vacíos arriba para agregar criaturas y comparar sus estadísticas lado a lado.',
+    'compare.selectPrompt': 'Selecciona al menos 2 items para comparar',
+    'compare.selectDesc': 'Haz clic en los espacios vacíos arriba para agregar personajes, jefes o criaturas y comparar sus estadísticas lado a lado.',
     'common.stat': 'Estadística',
 
     // Explorer
