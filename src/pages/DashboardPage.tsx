@@ -588,7 +588,10 @@ export function DashboardPage() {
       value: 'Revali',
       icon: Zap,
       subtitle: `${t('rankings.topSpeed', language)}: 95`,
-      onClick: () => navigate('/characters'),
+      onClick: () => {
+        const found = CHARACTERS.find((c) => c.name === 'Revali');
+        if (found) setSelectedCharacter(found);
+      },
       imageUrl: '/characters/revali.png',
     },
     {
@@ -596,7 +599,10 @@ export function DashboardPage() {
       value: 'Ganondorf',
       icon: Swords,
       subtitle: `${t('rankings.topAttack', language)}: 95`,
-      onClick: () => navigate('/characters'),
+      onClick: () => {
+        const found = CHARACTERS.find((c) => c.name === 'Ganondorf');
+        if (found) setSelectedCharacter(found);
+      },
       imageUrl: '/characters/ganondorf.png',
     },
     {
@@ -604,7 +610,10 @@ export function DashboardPage() {
       value: 'Daruk',
       icon: Shield,
       subtitle: `${t('rankings.topDefense', language)}: 95`,
-      onClick: () => navigate('/characters'),
+      onClick: () => {
+        const found = CHARACTERS.find((c) => c.name === 'Daruk');
+        if (found) setSelectedCharacter(found);
+      },
       imageUrl: '/characters/daruk.png',
     },
   ];
