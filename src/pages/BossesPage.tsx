@@ -23,7 +23,7 @@ import { t } from '@/constants/translations';
 
 // ─── Boss Data ───────────────────────────────────────────────────────────────
 
-interface Boss {
+export interface Boss {
   id: number;
   name: string;
   titleKey: string;
@@ -37,7 +37,7 @@ interface Boss {
   image: string;
 }
 
-const bosses: Boss[] = [
+export const bosses: Boss[] = [
   {
     id: 1,
     name: 'Ganon',

@@ -25,7 +25,7 @@ import { RACE_COLORS } from '@/constants';
 
 /* ─── Character Data ─────────────────────────────────── */
 
-interface CharacterData {
+export interface CharacterData {
   id: number;
   name: string;
   race: string;
@@ -35,7 +35,7 @@ interface CharacterData {
   image: string;
 }
 
-const CHARACTERS: CharacterData[] = [
+export const CHARACTERS: CharacterData[] = [
   {
     id: 1,
     name: 'Link',

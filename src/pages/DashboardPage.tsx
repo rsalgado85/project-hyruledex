@@ -1,65 +1,187 @@
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  Zap,
   Swords,
   Shield,
-  Hash,
-  Shapes,
-  Brain,
+  Users,
+  Skull,
+  Zap,
+  Flame,
 } from 'lucide-react';
 import { KPICard } from '@/components/common/KPICard';
-import { KPISkeleton } from '@/components/common/Skeleton';
-import { HeroCard } from '@/components/dashboard/HeroCard';
-import { TopAbilitiesCard } from '@/components/dashboard/TopAbilitiesCard';
-import { RecentCharactersCard } from '@/components/dashboard/RecentCharactersCard';
-import { TopEraCard } from '@/components/dashboard/TopEraCard';
-import { useDashboardKPIs, useAllCharacters } from '@/hooks/useCharacters';
-import { capitalize } from '@/utils/pokemonUtils';
 import { useAppStore } from '@/store/useAppStore';
 import { t } from '@/constants/translations';
-import { useMemo } from 'react';
+import { RACE_COLORS } from '@/constants';
+import { useMemo, useState, useEffect } from 'react';
+import { CHARACTERS, type CharacterData } from '@/pages/CharactersPage';
+import { bosses, type Boss } from '@/pages/BossesPage';
+
+/* ─── Shuffle helpers ────────────────────────────────── */
+
+function pickRandom<T>(arr: T[], count: number): T[] {
+  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, count);
+}
+
+/* ─── Stats for characters (normalized 0-100) ───────── */
+
+const CHARACTER_STATS: Record<string, { hp: number; atk: number; def: number; spd: number }> = {
+  'Link': { hp: 85, atk: 90, def: 80, spd: 88 },
+  'Princess Zelda': { hp: 70, atk: 45, def: 60, spd: 75 },
+  'Ganondorf': { hp: 95, atk: 95, def: 85, spd: 60 },
+  'Impa': { hp: 65, atk: 75, def: 55, spd: 90 },
+  'Daruk': { hp: 90, atk: 80, def: 95, spd: 35 },
+  'Mipha': { hp: 60, atk: 55, def: 50, spd: 80 },
+  'Revali': { hp: 55, atk: 70, def: 40, spd: 95 },
+  'Urbosa': { hp: 75, atk: 85, def: 65, spd: 70 },
+  'Fi': { hp: 50, atk: 40, def: 35, spd: 85 },
+  'Midna': { hp: 70, atk: 65, def: 55, spd: 80 },
+  'Tingle': { hp: 30, atk: 15, def: 20, spd: 40 },
+  'Beedle': { hp: 25, atk: 10, def: 15, spd: 50 },
+};
+
+/* ─── Featured Character Card (compact) ──────────────── */
+
+function FeaturedCard({
+  character,
+  language,
+}: {
+  character: CharacterData;
+  language: 'en' | 'es';
+}) {
+  const { theme } = useAppStore();
+  const isDark = theme === 'dark';
+  const raceColor = RACE_COLORS[character.race] || '#C6A15B';
+  const stats = CHARACTER_STATS[character.name] || { hp: 50, atk: 50, def: 50, spd: 50 };
+  const description = language === 'es' ? character.descriptionEs : character.description;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="rounded-[32px] p-6 h-full overflow-hidden relative"
+      style={{
+        background: isDark
+          ? `linear-gradient(145deg, ${raceColor}15 0%, rgba(12,16,20,0.95) 50%, ${raceColor}08 100%)`
+          : `linear-gradient(145deg, ${raceColor}10 0%, rgba(255,255,255,0.95) 50%, ${raceColor}05 100%)`,
+        backdropFilter: 'blur(25px)',
+        WebkitBackdropFilter: 'blur(25px)',
+        border: `1px solid ${raceColor}22`,
+      }}
+    >
+      {/* Glow */}
+      <div
+        className="absolute inset-0 rounded-[32px] pointer-events-none"
+        style={{ boxShadow: `inset 0 0 80px ${raceColor}10` }}
+      />
+
+      <div className="relative z-10 flex flex-col sm:flex-row items-center gap-6">
+        {/* Image */}
+        <div className="w-32 h-32 sm:w-40 sm:h-40 flex-shrink-0 rounded-2xl overflow-hidden"
+          style={{ background: `linear-gradient(135deg, ${raceColor}20, transparent)`, border: `1px solid ${raceColor}30` }}>
+          <img src={character.image} alt={character.name} className="w-full h-full object-contain p-2" />
+        </div>
+
+        {/* Info */}
+        <div className="flex-1 text-center sm:text-left">
+          <div className="flex items-center gap-2 justify-center sm:justify-start mb-1">
+            <span className="text-xs font-semibold tracking-widest uppercase text-text-secondary">
+              {t('dashboard.featuredPokemon', language)}
+            </span>
+            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase"
+              style={{ backgroundColor: `${raceColor}22`, color: raceColor, border: `1px solid ${raceColor}35` }}>
+              {character.race}
+            </span>
+          </div>
+          <h2 className="text-2xl font-black text-text-primary">{character.name}</h2>
+          <p className="text-xs text-text-secondary/60 mt-1 line-clamp-2">{description}</p>
+
+          {/* Stat bars */}
+          <div className="grid grid-cols-2 gap-2 mt-4">
+            {[
+              { label: '❤️', value: stats.hp, color: '#3E6B48' },
+              { label: '⚔️', value: stats.atk, color: '#8B3A3A' },
+              { label: '🛡️', value: stats.def, color: '#5B8A9E' },
+              { label: '⚡', value: stats.spd, color: '#C6A15B' },
+            ].map((stat) => (
+              <div key={stat.label} className="flex items-center gap-2">
+                <span className="text-sm w-6">{stat.label}</span>
+                <div className="flex-1 h-2 rounded-full bg-white/5 overflow-hidden">
+                  <motion.div
+                    className="h-full rounded-full"
+                    initial={{ width: 0 }}
+                    animate={{ width: `${stat.value}%` }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    style={{ backgroundColor: stat.color }}
+                  />
+                </div>
+                <span className="text-xs font-mono text-text-secondary w-8 text-right">{stat.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Boss Card (mini) ────────────────────────────────── */
+
+function BossMiniCard({ boss, language }: { boss: Boss; language: 'en' | 'es' }) {
+  const maxDifficulty = 5;
+  return (
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="rounded-2xl p-4 cursor-pointer"
+      style={{
+        background: `linear-gradient(135deg, ${boss.accentColor}12, transparent)`,
+        border: `1px solid ${boss.accentColor}22`,
+      }}
+    >
+      <div className="flex items-center gap-3">
+        <div className="w-12 h-12 rounded-xl overflow-hidden flex-shrink-0"
+          style={{ background: `${boss.accentColor}18`, border: `1px solid ${boss.accentColor}30` }}>
+          <img src={boss.image} alt={boss.name} className="w-full h-full object-contain p-1" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <h4 className="text-sm font-bold text-text-primary truncate">{boss.name}</h4>
+          <p className="text-[10px] text-text-secondary/60 truncate">{boss.game}</p>
+        </div>
+        <div className="flex gap-0.5">
+          {Array.from({ length: maxDifficulty }).map((_, i) => (
+            <div key={i} className={`w-2 h-2 rounded-sm ${i < boss.difficulty ? '' : 'opacity-20'}`}
+              style={{ backgroundColor: i < boss.difficulty ? boss.accentColor : '#666' }} />
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Main Dashboard ──────────────────────────────────── */
 
 export function DashboardPage() {
   const navigate = useNavigate();
-  const { kpis, isLoading } = useDashboardKPIs();
-  const { data: allCharacters } = useAllCharacters();
   const { language } = useAppStore();
 
-  // Create a map of character id to image URL
-  const characterImageMap = useMemo(() => {
-    if (!allCharacters) return new Map<number, string>();
-    const map = new Map<number, string>();
-    allCharacters.forEach((p) => {
-      map.set(p.id, p.artworkUrl);
-    });
-    return map;
-  }, [allCharacters]);
+  // Pick 3 random characters + 3 random bosses (stable for session)
+  const [featured, setFeatured] = useState<{ chars: CharacterData[]; bosses: Boss[] }>({ chars: [], bosses: [] });
 
-  // Calculate featured character ID
-  const featuredCharacterId = useMemo(() => {
-    if (!allCharacters || allCharacters.length === 0) return undefined;
-    const sorted = [...allCharacters].sort((a, b) => {
-      const statDiff = (b.totalStats || 0) - (a.totalStats || 0);
-      if (statDiff !== 0) return statDiff;
-      return a.id - b.id;
+  useEffect(() => {
+    setFeatured({
+      chars: pickRandom(CHARACTERS, 3),
+      bosses: pickRandom(bosses, 3),
     });
-    const topCandidates = sorted.slice(0, 10);
-    const dayOfYear = Math.floor(
-      (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000
-    );
-    const selectedIndex = dayOfYear % topCandidates.length;
-    return topCandidates[selectedIndex]?.id;
-  }, [allCharacters]);
+  }, []);
 
-  if (isLoading || !kpis) {
+  const featuredChar = featured.chars[0];
+  const showcaseChars = featured.chars.slice(1);
+  const showcaseBosses = featured.bosses;
+
+  if (!featuredChar) {
     return (
-      <div className="space-y-8">
-        <div className="space-y-2">
-          <h1 className="text-3xl font-bold gradient-text">{t('dashboard.title', language)}</h1>
-          <p className="text-text-secondary">{t('common.loading', language)}</p>
-        </div>
-        <KPISkeleton />
+      <div className="flex items-center justify-center h-64">
+        <div className="w-8 h-8 border-2 border-[#C6A15B] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -67,48 +189,45 @@ export function DashboardPage() {
   const kpiCards = [
     {
       label: t('dashboard.totalPokemon', language),
-      value: kpis.totalPokemon,
-      icon: Hash,
+      value: 12,
+      icon: Users,
       subtitle: t('dashboard.subtitleKanto', language),
     },
     {
       label: t('dashboard.totalTypes', language),
-      value: kpis.totalTypes,
-      icon: Shapes,
+      value: 8,
+      icon: Shield,
       subtitle: t('dashboard.subtitleTypes', language),
     },
     {
       label: t('dashboard.totalAbilities', language),
-      value: kpis.totalAbilities,
-      icon: Brain,
+      value: 12,
+      icon: Skull,
       subtitle: t('dashboard.subtitleAbilities', language),
     },
     {
       label: t('dashboard.fastest', language),
-      value: capitalize(kpis.fastest?.name ?? ''),
+      value: 'Revali',
       icon: Zap,
-      subtitle: `${t('rankings.topSpeed', language)}: ${kpis.fastest?.value}`,
+      subtitle: `${t('rankings.topSpeed', language)}: 95`,
       onClick: () => navigate('/characters'),
-      imageUrl: kpis.fastest?.id ? characterImageMap.get(kpis.fastest.id) : undefined,
-      pokemonId: kpis.fastest?.id,
+      imageUrl: '/characters/revali.png',
     },
     {
       label: t('dashboard.strongest', language),
-      value: capitalize(kpis.strongest?.name ?? ''),
+      value: 'Ganondorf',
       icon: Swords,
-      subtitle: `${t('rankings.topAttack', language)}: ${kpis.strongest?.value}`,
+      subtitle: `${t('rankings.topAttack', language)}: 95`,
       onClick: () => navigate('/characters'),
-      imageUrl: kpis.strongest?.id ? characterImageMap.get(kpis.strongest.id) : undefined,
-      pokemonId: kpis.strongest?.id,
+      imageUrl: '/characters/ganondorf.png',
     },
     {
       label: t('dashboard.toughest', language),
-      value: capitalize(kpis.toughest?.name ?? ''),
+      value: 'Daruk',
       icon: Shield,
-      subtitle: `${t('rankings.topDefense', language)}: ${kpis.toughest?.value}`,
+      subtitle: `${t('rankings.topDefense', language)}: 95`,
       onClick: () => navigate('/characters'),
-      imageUrl: kpis.toughest?.id ? characterImageMap.get(kpis.toughest.id) : undefined,
-      pokemonId: kpis.toughest?.id,
+      imageUrl: '/characters/daruk.png',
     },
   ];
 
@@ -126,16 +245,35 @@ export function DashboardPage() {
         </p>
       </motion.div>
 
-      {/* Hero Section - Premium Layout */}
+      {/* Hero Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-        {/* Hero Card - Takes 2/3 of the width */}
         <div className="lg:col-span-2">
-          <HeroCard pokemonId={featuredCharacterId} />
+          <FeaturedCard character={featuredChar} language={language} />
         </div>
-
-        {/* Top Moves Card - Takes 1/3 - Shows moves of the featured Pokémon */}
-        <div className="lg:col-span-1">
-          <TopAbilitiesCard pokemonId={featuredCharacterId} />
+        <div className="lg:col-span-1 space-y-3">
+          {showcaseChars.map((c) => (
+            <motion.div
+              key={c.id}
+              whileHover={{ scale: 1.02 }}
+              onClick={() => navigate('/characters')}
+              className="rounded-2xl p-4 cursor-pointer"
+              style={{
+                background: `linear-gradient(135deg, ${RACE_COLORS[c.race] || '#C6A15B'}10, transparent)`,
+                border: `1px solid ${RACE_COLORS[c.race] || '#C6A15B'}18`,
+              }}
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0"
+                  style={{ background: `${RACE_COLORS[c.race] || '#C6A15B'}18` }}>
+                  <img src={c.image} alt={c.name} className="w-full h-full object-contain p-1" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-semibold text-text-primary">{c.name}</h4>
+                  <p className="text-[10px] text-text-secondary/60">{language === 'es' ? c.descriptionEs : c.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -153,18 +291,34 @@ export function DashboardPage() {
         ))}
       </div>
 
-      {/* Bottom Cards Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-        {/* Recent Pokémon Viewed - Takes 2/3 */}
-        <div className="lg:col-span-2">
-          <RecentCharactersCard />
+      {/* Bosses Showcase */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="rounded-2xl sm:rounded-[32px] p-4 sm:p-6"
+        style={{
+          background: 'rgba(255,255,255,0.04)',
+          backdropFilter: 'blur(25px)',
+          WebkitBackdropFilter: 'blur(25px)',
+          border: '1px solid rgba(255,255,255,0.06)',
+        }}
+      >
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Flame size={18} className="text-[#8B3A3A]" />
+            <h2 className="text-base sm:text-lg font-semibold">{t('nav.bosses', language)}</h2>
+          </div>
+          <button onClick={() => navigate('/bosses')} className="text-xs text-[#C6A15B] font-medium">
+            {t('dashboard.viewAll', language)} →
+          </button>
         </div>
-
-        {/* Top Generation - Takes 1/3 */}
-        <div className="lg:col-span-1">
-          <TopEraCard />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          {showcaseBosses.map((boss) => (
+            <BossMiniCard key={boss.id} boss={boss} language={language} />
+          ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Quick Actions */}
       <motion.div
@@ -181,54 +335,23 @@ export function DashboardPage() {
       >
         <h2 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4">{t('dashboard.quickActions', language)}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <motion.button
-            onClick={() => navigate('/characters')}
-            className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.04)',
-            }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <span className="text-xs sm:text-sm font-medium text-text-primary">{t('dashboard.viewStats', language)}</span>
-            <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{t('dashboard.viewStatsDesc', language)}</p>
-          </motion.button>
-          <motion.button
-            onClick={() => navigate('/bosses')}
-            className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.04)',
-            }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <span className="text-xs sm:text-sm font-medium text-text-primary">{t('dashboard.compare', language)}</span>
-            <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{t('dashboard.compareDesc', language)}</p>
-          </motion.button>
-          <motion.button
-            onClick={() => navigate('/items')}
-            className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.04)',
-            }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <span className="text-xs sm:text-sm font-medium text-text-primary">{t('dashboard.rankings', language)}</span>
-            <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{t('dashboard.rankingsDesc', language)}</p>
-          </motion.button>
-          <motion.button
-            onClick={() => navigate('/lore')}
-            className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
-            style={{
-              backgroundColor: 'rgba(255,255,255,0.03)',
-              border: '1px solid rgba(255,255,255,0.04)',
-            }}
-            whileHover={{ scale: 1.02 }}
-          >
-            <span className="text-xs sm:text-sm font-medium text-text-primary">{t('dashboard.insights', language)}</span>
-            <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{t('dashboard.insightsDesc', language)}</p>
-          </motion.button>
+          {[
+            { label: t('dashboard.viewStats', language), desc: t('dashboard.viewStatsDesc', language), path: '/characters' },
+            { label: t('dashboard.compare', language), desc: t('dashboard.compareDesc', language), path: '/bosses' },
+            { label: t('dashboard.rankings', language), desc: t('dashboard.rankingsDesc', language), path: '/items' },
+            { label: t('dashboard.insights', language), desc: t('dashboard.insightsDesc', language), path: '/lore' },
+          ].map((btn) => (
+            <motion.button
+              key={btn.path}
+              onClick={() => navigate(btn.path)}
+              className="rounded-xl sm:rounded-2xl p-3 sm:p-4 text-left transition-all duration-200 hover:translate-y-[-4px]"
+              style={{ backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.04)' }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <span className="text-xs sm:text-sm font-medium text-text-primary">{btn.label}</span>
+              <p className="text-[10px] sm:text-xs text-text-secondary mt-1">{btn.desc}</p>
+            </motion.button>
+          ))}
         </div>
       </motion.div>
     </div>
