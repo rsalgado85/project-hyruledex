@@ -90,6 +90,7 @@ export const ROUTES = {
   CREATURES: '/creatures',
   FAVORITES: '/favorites',
   ABOUT: '/about',
+  DONATE: '/donate',
 } as const;
 
 export const NAV_ITEMS = [
@@ -107,4 +108,5 @@ export const NAV_ITEMS = [
   { label: 'Games', path: ROUTES.GAMES, icon: 'Gamepad2' },
   { label: 'Favorites', path: ROUTES.FAVORITES, icon: 'Heart' },
   { label: 'About', path: ROUTES.ABOUT, icon: 'User' },
+  { label: 'Donate', path: ROUTES.DONATE, icon: 'Heart' },
 ] as const;

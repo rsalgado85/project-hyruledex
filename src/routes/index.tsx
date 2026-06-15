@@ -18,6 +18,7 @@ const MapsPage = lazy(() => import('@/pages/MapsPage').then(m => ({ default: m.M
 const CreaturesPage = lazy(() => import('@/pages/CreaturesPage').then(m => ({ default: m.CreaturesPage })));
 const FavoritesPage = lazy(() => import('@/pages/FavoritesPage').then(m => ({ default: m.FavoritesPage })));
 const AboutPage = lazy(() => import('@/pages/AboutPage').then(m => ({ default: m.AboutPage })));
+const DonatePage = lazy(() => import('@/pages/DonatePage').then(m => ({ default: m.DonatePage })));
 
 function SuspenseWrapper({ children }: { children: React.ReactNode }) {
   return (
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
       { path: 'creatures', element: <SuspenseWrapper><CreaturesPage /></SuspenseWrapper> },
       { path: 'favorites', element: <SuspenseWrapper><FavoritesPage /></SuspenseWrapper> },
       { path: 'about', element: <SuspenseWrapper><AboutPage /></SuspenseWrapper> },
+      { path: 'donate', element: <SuspenseWrapper><DonatePage /></SuspenseWrapper> },
     ],
   },
 ]);

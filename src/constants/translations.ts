@@ -19,6 +19,7 @@ export const translations = {
     'nav.games': 'Games',
     'nav.favorites': 'Favorites',
     'nav.about': 'About',
+    'nav.donate': 'Donate',
 
     // Characters Page
     'characters.title': 'Characters of Hyrule',
@@ -375,6 +376,13 @@ export const translations = {
     'about.quote': 'Technology leadership is not about knowing all the answers, but about building teams that can find them together.',
     'about.quoteAuthor': '— Robinson Salgado',
 
+    // Donate
+    'donate.title': 'Support HyruleDex',
+    'donate.desc': 'If you find HyruleDex useful, consider supporting its development with a donation.',
+    'donate.chooseAmount': 'Choose amount',
+    'donate.paypalButton': 'Donate with PayPal',
+    'donate.redirectNote': 'You will be redirected to PayPal to complete your donation.',
+
     // Bosses
     'bosses.title': 'Bosses of Hyrule',
     'bosses.subtitle': 'Epic encounters from the Zelda universe — face the most legendary adversaries Link has ever confronted',
@@ -463,6 +471,7 @@ export const translations = {
     'nav.games': 'Juegos',
     'nav.favorites': 'Favoritos',
     'nav.about': 'Acerca de',
+    'nav.donate': 'Donar',
 
     // Characters Page
     'characters.title': 'Personajes de Hyrule',
@@ -818,6 +827,13 @@ export const translations = {
     'about.tl6': 'Digital Solution Developer en Kantar Health Spain',
     'about.quote': 'El liderazgo tecnológico no se trata de tener todas las respuestas, sino de construir equipos que puedan encontrarlas juntos.',
     'about.quoteAuthor': '— Robinson Salgado',
+
+    // Donate
+    'donate.title': 'Apoya HyruleDex',
+    'donate.desc': 'Si encuentras útil HyruleDex, considera apoyar su desarrollo con una donación.',
+    'donate.chooseAmount': 'Elige un monto',
+    'donate.paypalButton': 'Donar con PayPal',
+    'donate.redirectNote': 'Serás redirigido a PayPal para completar tu donación.',
 
     // Bosses
     'bosses.title': 'Jefes de Hyrule',
